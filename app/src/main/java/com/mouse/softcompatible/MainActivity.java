@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private EditText et_index_20;
 
     private int mSoftIntputHeight;                             // 软键盘的高度
-    private boolean isGlobeListenerInited = false;            // 是否已经添加了全局监听器
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     // 添加布局监听器
     private void addGlobeListener() {
-        isGlobeListenerInited = true;
         fl_rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -167,9 +165,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         //设置显示光标
         ((EditText) v).setCursorVisible(true);
         // 添加布局监听器
-        if (!isGlobeListenerInited) {
-            addGlobeListener();
-        }
+        addGlobeListener();
         return false;
     }
 
