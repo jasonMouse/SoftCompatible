@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private EditText et_index_19;
     private EditText et_index_20;
 
-    private int mSoftIntputHeight;                             // 软键盘的高度
+    private int mSoftInputHeight;                             // 软键盘的高度
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,12 +113,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             public void onGlobalLayout() {
                 //获取软键盘的高度.
                 int softIntputHeight = getKeyboardHeight(fl_rootView);
-                Log.e("", "------------Keyboard mSoftIntputHeight: " + mSoftIntputHeight + ", softIntputHeight: " + softIntputHeight);
+                Log.e("", "------------Keyboard mSoftInputHeight: " + mSoftInputHeight + ", softIntputHeight: " + softIntputHeight);
                 //判断新获取的软键盘高度是否与之前的相等，如果相等则表示软键盘的状态没有发生变化.
-                if (mSoftIntputHeight == softIntputHeight) {
+                if (mSoftInputHeight == softIntputHeight) {
                     return;
                 }
-                mSoftIntputHeight = softIntputHeight;
+                mSoftInputHeight = softIntputHeight;
 
                 View v = getCurrentFocus(); //获取当前有焦点的控件
                 int[] leftTop = {0, 0};
@@ -128,12 +128,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 int bottom = top + v.getHeight();
                 //计算控件距离屏幕底部的像数值（屏幕的高度-输入框底部在窗口的位置+软键盘弹出前scrollview滚动的距离-软键盘弹出后scrollview滚动的距离）
                 final int height = fl_rootView.getHeight() - bottom + ((ObserveScrollView) svDetailContent).getScrolledY() - svDetailContent.getScrollY();
-                final int scrollDis = ((ObserveScrollView) svDetailContent).getScrolledY() + mSoftIntputHeight - height; //计算scrollview应该滚动到的位置
+                final int scrollDis = ((ObserveScrollView) svDetailContent).getScrolledY() + mSoftInputHeight - height; //计算scrollview应该滚动到的位置
                 LinearLayout.LayoutParams params = null;
                 View view = llDetailContent.findViewById(R.id.v_detail_softintput_view);
                 params = (LinearLayout.LayoutParams) view.getLayoutParams();
-                if (mSoftIntputHeight > 0) {
-                    params.height = mSoftIntputHeight;
+                if (mSoftInputHeight > 0) {
+                    params.height = mSoftInputHeight;
                     view.setLayoutParams(params);
                     if (scrollDis > 0) {
                         llDetailContent.post(new Runnable() {
