@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 LinearLayout.LayoutParams params = null;
                 View view = llDetailContent.findViewById(R.id.v_detail_softintput_view);
                 params = (LinearLayout.LayoutParams) view.getLayoutParams();
-                if (mSoftInputHeight > 0) {
+                if (mSoftInputHeight > 0) {// 如果键盘的占位图不在最底部  && (height <= softIntputHeight)
                     params.height = mSoftInputHeight;
                     view.setLayoutParams(params);
                     if (scrollDis > 0) {
